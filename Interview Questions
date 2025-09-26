@@ -1,0 +1,52 @@
+1. What is a firewall?
+A firewall is a network security system that monitors and controls incoming and outgoing network traffic based on a defined set of security rules. It acts as a barrier between a trusted internal network and untrusted external networks (like the internet).
+
+2. Difference between stateful and stateless firewall?
+Feature	Stateless Firewall (Packet Filtering)	Stateful Firewall (Stateful Inspection)
+Inspection	Examines each packet in isolation.	Tracks the state of active connections.
+Context	No knowledge of previous packets or connections.	Maintains a state table of active sessions.
+Security	Less secure; easily fooled by crafted packets.	More secure; ensures incoming packets are part of an established, legitimate session.
+Example	An incoming response to a request you sent out would still need an explicit rule to be allowed through.	An incoming response is automatically allowed if the firewall sees a matching, existing outgoing request in its state table.
+
+Export to Sheets
+3. What are inbound and outbound rules?
+Inbound Rules: Control traffic that is entering your network/host (e.g., a web server receiving a request). They protect your system from external threats.
+
+Outbound Rules: Control traffic that is leaving your network/host (e.g., a user browsing the web). They can prevent malware from "calling home" or leaking sensitive data.
+
+4. How does UFW simplify firewall management?
+UFW (Uncomplicated Firewall) is a front-end for iptables on Linux. It simplifies firewall management by:
+
+Simplifying Syntax: It replaces complex iptables commands with simple, intuitive commands (e.g., ufw allow 80 instead of a long iptables string).
+
+Default Policies: It comes with secure defaults that block all incoming traffic, following the principle of "deny by default."
+
+Service Names: It allows you to use service names (like ssh, http) instead of manually remembering port numbers (22,80).
+
+5. Why block port 23 (Telnet)?
+Port 23 is blocked because it is the default port for the Telnet protocol. Telnet is an unsecured protocol that transmits all data, including usernames and passwords, in plain text over the network. This makes the connection vulnerable to eavesdropping and Man-in-the-Middle attacks. The secure alternative, SSH (Secure Shell) on port 22, should be used instead.
+
+6. What are common firewall mistakes?
+Over-Permissiveness: Creating overly broad rules (e.g., allowing "Any" source/destination) that open unnecessary ports, violating the principle of least privilege.
+
+Incorrect Rule Order: Firewalls process rules top-down, and the first matching rule wins. Placing a too-broad ALLOW rule before a specific DENY rule can allow malicious traffic to bypass the block.
+
+Failure to Log and Monitor: Not logging denied traffic or monitoring logs, making it impossible to detect and troubleshoot attacks or misconfigurations.
+
+Leaving Unused Rules: Accumulating outdated or unused rules, which clutters the configuration, degrades performance, and can introduce vulnerabilities.
+
+7. How does a firewall improve network security?
+A firewall is foundational to network security by:
+
+Enforcing Security Policy: It translates an organization's security requirements into technical rules.
+
+Filtering Malicious Traffic: It blocks unauthorized access attempts, scans, and known attack patterns based on IP, port, and protocol.
+
+Network Segmentation: It can divide a network into zones (e.g., DMZ, Internal), limiting the movement of an attacker once they gain a foothold.
+
+Logging and Auditing: It provides logs of all traffic attempts, which are essential for security monitoring, threat detection, and forensics.
+
+8. What is NAT in firewalls?
+NAT (Network Address Translation) is a feature in firewalls and routers that translates one IP address space into another. Its primary use is to allow multiple devices with private IP addresses within a private network to share a single, public IP address when accessing the internet.
+
+How it works: When a private device sends a request out, the firewall replaces the device's private source IP address and port with its own public IP and a new port. When the response returns, the firewall looks up the connection in its NAT table and translates the address/port back to the original private device. This also provides security by hiding the internal network's structure from the outside world.
