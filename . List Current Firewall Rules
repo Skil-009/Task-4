@@ -1,0 +1,67 @@
+Windows (PowerShell):
+
+PowerShell
+
+Get-NetFirewallRule | Format-Table Name, Enabled, Direction, Action, Protocol, LocalPort -AutoSize
+Linux (UFW):
+
+Bash
+
+sudo ufw status verbose
+(Note: If UFW is inactive, you'll need to enable it first with sudo ufw enable)
+
+3. Add Rule to Block Inbound Traffic on a Specific Port (e.g., 23 for Telnet)
+Windows (PowerShell):
+
+PowerShell
+
+# Creates a rule named 'Block-Telnet-Inbound' that denies all inbound traffic on TCP port 23
+New-NetFirewallRule -DisplayName "Block-Telnet-Inbound" -Direction Inbound -LocalPort 23 -Protocol TCP -Action Block
+Linux (UFW):
+
+Bash
+
+# Deletes any existing rule for Telnet, then explicitly blocks inbound on TCP port 23
+sudo ufw delete deny 23/tcp
+sudo ufw deny 23/tcp
+4. Test the Rule
+Attempt to connect to the Telnet port (23) locally or remotely (from another machine) to verify the block.
+
+Test Command (from another machine or locally if a Telnet service is running):
+
+Bash
+
+# Attempt to connect to your machine's IP address on port 23
+telnet <Your_IP_Address> 23
+Expected Outcome: The connection should be refused or timeout, indicating the firewall successfully blocked the traffic.
+
+5. Add Rule to Allow SSH (Port 22) on Linux
+Linux (UFW):
+
+Bash
+
+# Allows all incoming traffic on TCP port 22 (the default for SSH)
+sudo ufw allow ssh 
+# OR: sudo ufw allow 22/tcp
+Test Command (from another machine): Attempt an SSH connection.
+
+Bash
+
+ssh <Your_Username>@<Your_IP_Address>
+Expected Outcome: The connection should be successful, allowing you to log in.
+
+6. Remove the Test Block Rule and Restore Original State
+Windows (PowerShell):
+
+PowerShell
+
+# Removes the rule created in step 3
+Remove-NetFirewallRule -DisplayName "Block-Telnet-Inbound"
+Linux (UFW):
+
+Bash
+
+# Removes the rule blocking Telnet (23/tcp)
+sudo ufw delete deny 23/tcp
+# To remove the SSH rule if added for testing:
+sudo ufw delete allow ssh 
