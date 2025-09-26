@@ -1,0 +1,9 @@
+The objective is to configure and test basic firewall rules on Windows/Linux (using Windows Firewall or UFW on Linux).
+
+Practical Steps Outline
+This solution will use UFW (Uncomplicated Firewall) for the Linux part, as it's the recommended, user-friendly tool on many distributions. For Windows, we'll use the Windows Defender Firewall with Advanced Security GUI or a command line (like PowerShell).
+
+1. Open Firewall Configuration Tool
+Operating System	Tool/Command
+Windows	GUI: Search for Windows Defender Firewall with Advanced Security. Command Line (PowerShell/CMD): Use NetSecurity or netsh advfirewall.
+Linux (UFW)	Terminal: sudo ufw status
