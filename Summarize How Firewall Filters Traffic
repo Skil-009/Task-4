@@ -1,0 +1,10 @@
+A firewall works by inspecting data packets that travel between networks (like your computer and the internet). It uses a set of rules to decide the fate of each packet, based on criteria like:
+
+Source/Destination IP Address: Where the traffic is coming from and going to.
+
+Protocol: (e.g., TCP, UDP, ICMP).
+
+Port Number: (e.g., 80 for HTTP, 443 for HTTPS, 22 for SSH).
+
+Rule Action: Allow (Accept), Block (Drop/Reject).
+The firewall checks packets against these rules in order, and the first matching rule determines the action. An implied or explicit default rule (usually a "deny all") is at the end to catch anything not explicitly allowed.
